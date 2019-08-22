@@ -7,6 +7,8 @@
 ```
 $ python analysis.py
 ```
+![alt text](scatterWithLinRegress.png "Logo Title Text 1")
+
 
 ## Generate 3D Plot with iris data
 ```
