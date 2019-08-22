@@ -1,8 +1,9 @@
 # petals, python, bokeh, matplotlib
+--some python and data science learning
 
 ![alt text](housing_data.png "Logo Title Text 1")
 
-## Generate X Y Plot with iris data
+## Generate X Y Plot with borrowed regression data
 ```
 $ python analysis.py
 ```

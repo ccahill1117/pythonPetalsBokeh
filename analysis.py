@@ -7,6 +7,12 @@ from bokeh.models.tools import HoverTool
 from bokeh.io import output_file, output_notebook
 from bokeh.layouts import row, column, gridplot
 from bokeh.models.widgets import Tabs, Panel
+from sklearn.linear_model import LinearRegression
+from matplotlib.ticker import MultipleLocator
+from matplotlib.ticker import MaxNLocator
+from scipy import stats
+import scipy as sp
+
 
 # s = pd.Series([1, 3, 5, np.nan, 6, 8])
 # print(s)
@@ -14,78 +20,25 @@ from bokeh.models.widgets import Tabs, Panel
 # dates = pd.date_range('20130101',periods=6)
 # # print(dates)
 
-# df = pd.DataFrame(np.random.randn(6, 6), index=dates, columns=list('ABCDEF'))
-# print(df.head(2))
-# print(df.tail(2))
+data = pd.read_csv('data.csv')
+X = data.iloc[:, 0].values.reshape(-1, 1)
+Y = data.iloc[:, 1].values.reshape(-1, 1)
 
-# print(df)
+slope, intercept, r_value, p_value, std_err = sp.stats.mstats.linregress(X,Y)
 
-# df2 = pd.DataFrame({'A': 1.,
-#                         'B': pd.Timestamp('20130102'),
-#                         'C': pd.Series(1, index=list(range(4)), dtype='float32'),
-#                         'D': np.array([3] * 4, dtype='int32'),
-#                         'E': pd.Categorical(["test", "train", "test", "train"]),
-#                         'F': 'foo'})
-# # print(df2)
-# print(df2.dtypes)
+linear_regressor = LinearRegression()
+linear_regressor.fit(X, Y)
+Y_pred = linear_regressor.predict(X)
 
-# data = {
-#   'apples': [0,1,2,3],
-#   'cars': [9,8,7,43]
-# }
-# print(pd.DataFrame(data))
-
-# df = pd.DataFrame({
-#                       # 'A': ['one', 'one', 'two', 'three'] * 3,
-#                       # 'B': ['A', 'B', 'C'] * 4,
-#                       # 'C': ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
-#                       'D': (np.absolute(np.random.randn(30))),
-#                       'E': (np.absolute(np.random.randn(30)))})
-# print(df)     
-
-# dff = pd.Series(
-#                       # 'A': ['one', 'one', 'two', 'three'] * 3,
-#                       # 'B': ['A', 'B', 'C'] * 4,
-#                       # 'C': ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2,
-#                       (np.absolute(np.random.randn(30))),
-#                       (np.absolute(np.random.randn(30))))
-
-x = np.random.randn(1000)*2
-y = np.random.randn(1000)*4
+print('r',r_value)
+print('slope',slope)
+print('intercept',intercept)
 
 
-fig = figure(background_fill_color='gray',
-            background_fill_alpha=0.5,
-            border_fill_color='blue',
-            border_fill_alpha=0.25,
-            plot_height=1000,
-            plot_width=1000,
-            h_symmetry=True,
-            x_axis_label='X Label',
-            x_axis_type='linear',
-            x_axis_location='above',
-            y_axis_label='Y Label',
-            y_axis_type='linear',
-            y_axis_location='left',
-            y_range=(-20, 20),
-            x_range=(-20, 20),
-            title='Example Figure',
-            title_location='right',
-            toolbar_location='below',
-            tools='save')
+plt.scatter(X, Y)
 
-fig.circle(x=x,y=y,
-          color='red', size=4, alpha=0.5)             
-
-show(fig)
-# fig.show()             
-
-
-# p.circle(x, y, size=10, color='red', legend='circle')
-# p.line(x, y, color='blue', legend='line')
-# p.triangle(y, x, color='gold', size=10, legend='triangle')
-
-# output_file('my_first_graph.html')
+plt.plot(X, Y_pred, color='red')
+plt.show()
 
 def thing():
   return 'hi'
