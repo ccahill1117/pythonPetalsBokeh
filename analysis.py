@@ -50,34 +50,35 @@ from bokeh.models.widgets import Tabs, Panel
 #                       (np.absolute(np.random.randn(30))),
 #                       (np.absolute(np.random.randn(30))))
 
-x = [5,4,3,2]
-y = [1,2,3,4]
+x = np.random.randn(1000)*2
+y = np.random.randn(1000)*4
+
 
 fig = figure(background_fill_color='gray',
-             background_fill_alpha=0.5,
-             border_fill_color='blue',
-             border_fill_alpha=0.25,
-             plot_height=300,
-             plot_width=500,
-             h_symmetry=True,
-             x_axis_label='X Label',
-             x_axis_type='datetime',
-             x_axis_location='above',
-             y_axis_label='Y Label',
-             y_axis_type='linear',
-             y_axis_location='left',
-             y_range=(0, 10),
-             x_range=(0, 10),
-             title='Example Figure',
-             title_location='right',
-             toolbar_location='below',
-             tools='save')
+            background_fill_alpha=0.5,
+            border_fill_color='blue',
+            border_fill_alpha=0.25,
+            plot_height=300,
+            plot_width=500,
+            h_symmetry=True,
+            x_axis_label='X Label',
+            x_axis_type='linear',
+            x_axis_location='above',
+            y_axis_label='Y Label',
+            y_axis_type='linear',
+            y_axis_location='left',
+            y_range=(0, 10),
+            x_range=(0, 10),
+            title='Example Figure',
+            title_location='right',
+            toolbar_location='below',
+            tools='save')
 
 fig.circle(x=x,y=y,
-          color='red', size=12, alpha=0.5)             
+          color='red', size=4, alpha=0.5)             
 
-show(fig)             
-
+show(fig)
+# fig.show()             
 
 
 # p.circle(x, y, size=10, color='red', legend='circle')
